@@ -60,4 +60,6 @@ python3 -m http.server 8000
 
 ## Deployment
 
-Deployed on [Railway](https://railway.app) from a `Dockerfile` (Caddy serving static files). Pushes to `main` redeploy automatically.
+Live at **https://alien-key-production-db02.up.railway.app**
+
+Runs as the `alien-key` service inside the `spiegelweb-console` Railway project, built from the `Dockerfile` (Caddy serving static files). Pushes to `main` redeploy automatically.

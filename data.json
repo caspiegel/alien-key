@@ -1,0 +1,325 @@
+{
+  "meta": {
+    "title": "The Alien Key",
+    "subtitle": "A branching map of what could be true, and why you might believe it"
+  },
+
+  "arguments": {
+    "fermi": {
+      "title": "The Fermi Paradox",
+      "body": "The galaxy is ~13 billion years old and contains hundreds of billions of stars. Even at sublight speeds, a single expansionist civilization could colonize it in a few million years — an eyeblink cosmologically. So where is everybody? The silence is the single most important datum we have, and every branch of this tree owes it an explanation."
+    },
+    "drake": {
+      "title": "The Drake Equation",
+      "body": "Frank Drake's 1961 formula multiplies star formation rate by the fractions with planets, life, intelligence, technology, and by civilization lifespan. Its real function is not to produce a number but to expose which term you're smuggling your assumptions into. Every term to the left of f_i is now reasonably well constrained by exoplanet surveys. Everything to the right is vibes."
+    },
+    "great-filter": {
+      "title": "The Great Filter",
+      "body": "Robin Hanson's framing: something between dead matter and galaxy-spanning civilization is extraordinarily improbable. The vital question is whether that filter is behind us (we're a fluke, and alone) or ahead of us (everyone dies at roughly our stage, and so will we). Finding independent life elsewhere — especially complex life — is therefore terrible news."
+    },
+    "rare-earth": {
+      "title": "The Rare Earth Hypothesis",
+      "body": "Ward and Brownlee's argument that microbial life may be common but complex life requires an implausible stack of coincidences: a large stabilizing moon, a gas giant sweeping debris, plate tectonics, a magnetic field, a quiet galactic neighborhood, billions of years without a sterilizing event. Each is plausible; the conjunction is not."
+    },
+    "abiogenesis-once": {
+      "title": "Life Arose Here Exactly Once",
+      "body": "Every organism on Earth shares one genetic code and one chirality. Four billion years of a planet drenched in liquid water and organic chemistry produced, so far as we can detect, a single origin event. If abiogenesis were easy, we might expect a shadow biosphere. We don't see one. (Counterpoint: the first winner may simply have eaten all the competition.)"
+    },
+    "early-life": {
+      "title": "Life Appeared Almost Immediately",
+      "body": "Earth became habitable roughly 4.4 billion years ago and shows biosignatures by ~3.8 billion years ago — essentially the moment it stopped being molten. A process that starts the instant it's allowed to doesn't look like a long-shot fluke. It looks like chemistry doing what chemistry does. (Counterpoint: selection effect — we could only ever observe a world where it happened fast enough to produce us.)"
+    },
+    "exoplanets": {
+      "title": "Planets Are Everywhere",
+      "body": "As of the 2020s we've confirmed thousands of exoplanets and inferred that most stars have them, with billions of roughly Earth-sized worlds in habitable zones in this galaxy alone. Two of the Drake equation's scariest terms turned out to be near 1. The stage is enormous and the sets are all built."
+    },
+    "distance": {
+      "title": "The Tyranny of Distance",
+      "body": "The nearest star is 4.2 light-years away — about 80,000 years at Voyager speeds. Interstellar travel isn't merely hard, it is thermodynamically brutal: relativistic transit costs energy comparable to a civilization's entire output, and any dust grain becomes a bomb. 'Advanced' does not repeal physics; it only means you've found what physics actually permits."
+    },
+    "uap-evidence": {
+      "title": "The UAP Record",
+      "body": "Decades of military encounters, radar-visual correlations, and — since 2017 — official acknowledgment that the phenomenon is real and unexplained. What it is remains open. 'Unidentified' is an admission of ignorance, not a synonym for 'alien.' But the sensor data is not nothing, and the institutional embarrassment of releasing it argues against pure fabrication."
+    },
+    "no-artifacts": {
+      "title": "The Absence of Debris",
+      "body": "A civilization visiting for centuries — or a galaxy hosting millions of them over billions of years — should have left something durable. No unambiguous artifact, no anomalous isotope ratio, no Lurker probe found in the asteroid belt, no engineered structure in any survey. Physical presence tends to leave physical residue. We have found none."
+    },
+    "zoo": {
+      "title": "The Zoo Hypothesis",
+      "body": "They know we're here and are deliberately abstaining — a quarantine, a nature preserve, or a developmental protocol. Explains the silence elegantly. Its weakness is that it requires perfect, permanent compliance from every member of every civilization for millions of years. All it takes is one defector to blow the whole thing, and the space of possible defectors is unimaginably large."
+    },
+    "dark-forest": {
+      "title": "The Dark Forest",
+      "body": "Liu Cixin's formulation: given that you cannot verify another civilization's intent, and that technological growth is explosive, the rational move for any civilization is to stay silent and destroy anything that reveals itself. The silence isn't absence — it's discipline. Everyone is hiding, and the ones who weren't aren't around to be heard."
+    },
+    "berserker": {
+      "title": "Berserker Probes",
+      "body": "A variant of the dark forest with no negotiation at all: self-replicating machines that sterilize emerging technological civilizations. Requires only one paranoid or careless progenitor, ever, in the history of the galaxy. Note that this hypothesis and 'we detect nothing' are perfectly consistent — which is exactly what makes it unfalsifiable and unnerving."
+    },
+    "no-conquest-motive": {
+      "title": "There's Nothing Here Worth Taking",
+      "body": "Every element on Earth is more cheaply obtained from an asteroid or a gas giant with no gravity well and no biosphere to fight. A civilization capable of crossing interstellar space has, by construction, solved energy and materials. The classic invasion narrative projects 19th-century colonial economics onto beings who would have no use for it. Water, metals, real estate — all abundant, all easier elsewhere."
+    },
+    "cost-of-hostility": {
+      "title": "Hostility Is Expensive",
+      "body": "Crossing light-years to fight is an absurd return on investment. If they wanted us gone, an unannounced relativistic projectile costs almost nothing and we would never see it coming. That we are still here, given how long they'd have had, is weak but real evidence against active malice."
+    },
+    "indifference-default": {
+      "title": "Indifference Is the Boring Default",
+      "body": "We do not negotiate with anthills, but we also do not hate them. The gulf in capability that interstellar travel implies makes 'benevolent' and 'hostile' both suspiciously anthropocentric. We may simply be scenery — or a data point in a survey that concluded long ago."
+    },
+    "prime-directive": {
+      "title": "Non-Interference as Ethics",
+      "body": "Contact with a technologically superior culture has, in every human instance, been catastrophic for the weaker party — even when the intent was benign. A sufficiently wise civilization might have learned this and adopted abstention as a moral principle. This is the zoo hypothesis with a conscience attached."
+    },
+    "premature-contact": {
+      "title": "We Aren't Ready and They Know It",
+      "body": "Revelation might collapse religious, political, and economic institutions faster than we could rebuild them. Gradual acclimatization — or waiting for us to reach some threshold of maturity — could be the kindest available option. Convenient, unfalsifiable, and not therefore false."
+    },
+    "cant-perceive": {
+      "title": "We May Not Be Able to Perceive Them",
+      "body": "We assume contact means a ship and a handshake. But a sufficiently advanced intelligence might be as legible to us as international finance is to a dog. The signal could be arriving continuously and simply not be parsed as signal. This dissolves the paradox — at the cost of being nearly impossible to test."
+    },
+    "unfalsifiable": {
+      "title": "The Unfalsifiability Trap",
+      "body": "Notice how many benevolent-alien explanations share a structure: they explain the absence of evidence by positing an agent that intends the absence of evidence. Such theories are compatible with every possible observation and therefore predict none. That doesn't make them wrong. It does mean believing them is a choice rather than a conclusion, and you should know which one you're making."
+    },
+    "sooner-or-later": {
+      "title": "Time Is Very Long",
+      "body": "If a civilization arose even 1% earlier than ours in a 13-billion-year galaxy, it has a 130-million-year head start. 'They haven't gotten here yet' requires that essentially nobody, anywhere, ever, got a meaningful head start — or that expansion is far harder than it looks. The timing coincidence required is severe."
+    },
+    "youre-early": {
+      "title": "We May Simply Be Early",
+      "body": "Star formation will continue for trillions of years; most stars that will ever exist don't exist yet. Red dwarfs burn for a hundred billion years. On the full timeline of the habitable universe, we are not a latecomer to an empty party — we're the ones who showed up while the caterers were still setting up."
+    },
+    "von-neumann": {
+      "title": "Self-Replicating Probes Should Already Be Here",
+      "body": "You don't need to send people. A single self-replicating probe, doubling and dispersing at even 1% of light speed, saturates the galaxy in a few million years. Building one is arguably within a few centuries of our own capability. Their absence in our solar system is one of the sharper arrows in the Fermi quiver — though we have, in fairness, searched almost none of it."
+    },
+    "past-visit": {
+      "title": "A Survey, Long Ago",
+      "body": "A probe or expedition that passed through 50 million years ago would have found no one to talk to and left no trace we'd recognize. Earth's surface recycles; almost nothing survives that long. This is entirely consistent with all available evidence — and is, for that reason, almost entirely untestable."
+    },
+    "detection-window": {
+      "title": "Our Detection Window Is Absurdly Narrow",
+      "body": "We've been radio-capable for about a century and have searched a vanishing fraction of the sky, in a narrow band, for a narrow signal type, over a few decades. Declaring the galaxy silent on this basis is like dipping a glass into the ocean, finding no fish, and concluding the sea is sterile."
+    }
+  },
+
+  "nodes": {
+    "root": {
+      "label": "Start here",
+      "claim": "Are we alone?",
+      "summary": "The oldest question that admits of an empirical answer. Pick a fork — you can always back out. Nothing here is settled, and the honest positions are the ones that know what would change their mind.",
+      "children": ["exist", "not-exist"]
+    },
+
+    "not-exist": {
+      "label": "We are alone",
+      "claim": "Aliens do not exist. Life — or at least intelligent life — happened exactly once, here.",
+      "summary": "The loneliest hypothesis, and the one that best explains the evidence we actually have, which is silence. Its cost is a staggering coincidence: that of all the trillions of worlds, the one that got lucky is the one you're standing on.",
+      "for": ["fermi", "great-filter", "rare-earth", "abiogenesis-once", "no-artifacts"],
+      "against": ["exoplanets", "early-life", "drake", "detection-window"],
+      "children": ["filter-behind", "filter-ahead"]
+    },
+    "filter-behind": {
+      "label": "The filter is behind us",
+      "claim": "The improbable step already happened. We passed it, and that's why the sky is empty.",
+      "summary": "Abiogenesis, or eukaryotes, or the leap to general intelligence, is the bottleneck — and we're through it. Cosmically lonely, but the future is open.",
+      "for": ["abiogenesis-once", "rare-earth"],
+      "against": ["early-life"],
+      "seeAlso": ["exist"]
+    },
+    "filter-ahead": {
+      "label": "The filter is ahead of us",
+      "claim": "Everyone gets roughly this far, and then something kills them. We're next.",
+      "summary": "The most alarming cell in the entire tree. If we ever find independent life on Mars or Europa, the probability mass shifts here — hard. Pray for a sterile solar system.",
+      "for": ["great-filter", "fermi", "berserker"],
+      "against": ["early-life"],
+      "seeAlso": ["hostile"]
+    },
+
+    "exist": {
+      "label": "Aliens exist",
+      "claim": "Life beyond Earth exists somewhere.",
+      "summary": "The universe is large, the chemistry is universal, and the ingredients are everywhere. But existing and mattering to us are very different claims — the next fork is where it gets interesting.",
+      "for": ["exoplanets", "early-life", "drake"],
+      "against": ["fermi", "rare-earth", "great-filter"],
+      "children": ["advanced", "not-advanced"]
+    },
+
+    "not-advanced": {
+      "label": "…but not more advanced than us",
+      "claim": "They exist, but they are microbial, pre-technological, or roughly our peers.",
+      "summary": "The quietly likely option. Four billion years of Earth history were microbes; complex life is a late and possibly fragile accident. A galaxy teeming with slime is still a galaxy that never calls.",
+      "for": ["rare-earth", "fermi", "no-artifacts"],
+      "against": ["sooner-or-later"],
+      "children": ["peers", "microbial"]
+    },
+    "microbial": {
+      "label": "Life, but not minds",
+      "claim": "The galaxy is damp with microbes and empty of thinkers.",
+      "summary": "Resolves Fermi completely and cheaply. The catch: if life is common but intelligence is absent, that's evidence the filter sits somewhere between the two — or worse, after.",
+      "for": ["rare-earth", "fermi"],
+      "against": ["drake"],
+      "seeAlso": ["filter-ahead"]
+    },
+    "peers": {
+      "label": "Rough contemporaries",
+      "claim": "Someone out there is at about our level, right now.",
+      "summary": "Requires a coincidence in cosmic timing so precise it's nearly a miracle in its own right — two civilizations within a few centuries of each other on a 13-billion-year clock.",
+      "for": ["detection-window"],
+      "against": ["sooner-or-later"],
+      "seeAlso": ["not-visited"]
+    },
+
+    "advanced": {
+      "label": "…and more advanced than us",
+      "claim": "At least one civilization out there is significantly ahead of us technologically.",
+      "summary": "Given the age of the galaxy, this is nearly forced: if anyone exists at all, someone almost certainly got a multi-million-year head start. Which makes their absence from our skies the thing demanding explanation.",
+      "for": ["sooner-or-later", "drake"],
+      "against": ["youre-early", "rare-earth"],
+      "children": ["visited", "not-visited"]
+    },
+
+    "not-visited": {
+      "label": "They haven't visited",
+      "claim": "They're out there and ahead of us, but they have never come here.",
+      "summary": "Either they can't, they won't, or they haven't gotten around to it. Each of those is a different universe to live in.",
+      "for": ["distance", "no-artifacts", "zoo", "dark-forest"],
+      "against": ["von-neumann", "sooner-or-later", "uap-evidence"],
+      "children": ["cant", "wont", "not-yet"]
+    },
+    "cant": {
+      "label": "They can't",
+      "claim": "Interstellar travel is effectively impossible, even for them.",
+      "summary": "Physics is not a bureaucracy you can lobby. If c is a real wall and the energy budget is genuinely prohibitive, every civilization is a prisoner in its own system — and the silence is simply the sound of everyone being stuck.",
+      "for": ["distance", "no-artifacts"],
+      "against": ["von-neumann"]
+    },
+    "wont": {
+      "label": "They won't",
+      "claim": "They can, but they've chosen not to — or chosen to hide.",
+      "summary": "The silence is a policy, not a fact. Whether that policy is fear, ethics, or indifference is the fork that follows.",
+      "for": ["zoo", "dark-forest", "prime-directive"],
+      "against": ["unfalsifiable"],
+      "seeAlso": ["benevolent", "hostile"]
+    },
+    "not-yet": {
+      "label": "They haven't yet",
+      "claim": "They're coming, or will. We're just early on their list.",
+      "summary": "Comforting and shaky. The galaxy is crossable in a few million years; 'not yet' has to explain why the clock hasn't already run out many times over.",
+      "for": ["youre-early", "distance"],
+      "against": ["sooner-or-later", "von-neumann"]
+    },
+
+    "visited": {
+      "label": "They have visited",
+      "claim": "Someone has been here.",
+      "summary": "The claim that carries the most weight and the least evidence. Note the asymmetry: proving one visit requires one artifact; disproving all visits requires searching a planet and 4.5 billion years of its history.",
+      "for": ["uap-evidence", "sooner-or-later", "von-neumann"],
+      "against": ["no-artifacts", "distance"],
+      "children": ["here-now", "were-past"]
+    },
+    "were-past": {
+      "label": "They were here in the past",
+      "claim": "A visit or survey occurred long ago and is over.",
+      "summary": "Perfectly consistent with everything we observe, which is also its problem. A probe that passed through in the Cretaceous owes us no evidence at all.",
+      "for": ["past-visit", "von-neumann"],
+      "against": ["no-artifacts", "unfalsifiable"]
+    },
+
+    "here-now": {
+      "label": "They are here now",
+      "claim": "There is a non-human intelligence present in or around Earth at this moment.",
+      "summary": "The live wire. Everything downstream turns on a single question we have no good way to answer: what do they want?",
+      "for": ["uap-evidence"],
+      "against": ["no-artifacts", "unfalsifiable", "distance"],
+      "children": ["hostile", "indifferent", "benevolent"]
+    },
+
+    "hostile": {
+      "label": "Hostile",
+      "claim": "They mean us harm, or will.",
+      "summary": "The intuition is ancient and the logic is thin. If a civilization capable of crossing light-years wanted us dead, we would be dead — and it would have cost them almost nothing.",
+      "for": ["dark-forest", "berserker"],
+      "against": ["cost-of-hostility", "no-conquest-motive"],
+      "children": ["waiting", "already-acting"]
+    },
+    "waiting": {
+      "label": "Biding their time",
+      "claim": "Hostile, but waiting — for a trigger, a threshold, or an opportune moment.",
+      "summary": "Requires them to have a reason to delay that outweighs the compounding risk of letting a rival civilization grow. Hard to make coherent unless we're being cultivated for something.",
+      "for": ["dark-forest"],
+      "against": ["cost-of-hostility"]
+    },
+    "already-acting": {
+      "label": "Already acting on us",
+      "claim": "The harm is underway and we haven't recognized it as harm.",
+      "summary": "Manipulation, extraction, or experimentation below our threshold of detection. Maximally unfalsifiable — which is precisely why it's so seductive and so epistemically dangerous.",
+      "for": ["cant-perceive"],
+      "against": ["unfalsifiable", "cost-of-hostility"]
+    },
+
+    "indifferent": {
+      "label": "Indifferent",
+      "claim": "They don't care about us one way or the other.",
+      "summary": "The most probable and least dramatic answer. We are not the protagonists; we're the local fauna in a survey that finished before we invented writing.",
+      "for": ["indifference-default", "no-conquest-motive", "cant-perceive"],
+      "against": ["uap-evidence"],
+      "children": ["scenery", "not-about-us"]
+    },
+    "scenery": {
+      "label": "We're scenery",
+      "claim": "They noticed us, catalogued us, and moved on.",
+      "summary": "An entry in a database. The universe does not owe you a starring role.",
+      "for": ["indifference-default"],
+      "against": []
+    },
+    "not-about-us": {
+      "label": "They're not here for us",
+      "claim": "Their presence has nothing to do with humanity at all.",
+      "summary": "Resource extraction, transit, automated maintenance, or a process we lack the concepts to name. Their being here and their caring about us are independent variables — an assumption almost everyone makes without noticing.",
+      "for": ["cant-perceive", "indifference-default"],
+      "against": []
+    },
+
+    "benevolent": {
+      "label": "Benevolent",
+      "claim": "They wish us well.",
+      "summary": "If they're friendly, the obvious question becomes unavoidable: why the silence? Every answer below is an attempt to make kindness and absence compatible.",
+      "for": ["cost-of-hostility", "prime-directive"],
+      "against": ["unfalsifiable", "indifference-default"],
+      "children": ["ethics", "not-ready", "already-known", "cant-parse"]
+    },
+    "ethics": {
+      "label": "Non-interference is their ethic",
+      "claim": "They abstain on principle.",
+      "summary": "The zoo hypothesis with a moral spine. Fragile for one reason: it demands unanimity across every individual, faction, and generation of a civilization, forever. One dissident ends it.",
+      "for": ["prime-directive", "zoo"],
+      "against": ["unfalsifiable"]
+    },
+    "not-ready": {
+      "label": "We aren't ready",
+      "claim": "They're waiting for us to mature.",
+      "summary": "Contact is withheld as an act of care. Flattering, paternalistic, and impossible to disconfirm — note how neatly it explains away exactly the evidence we lack.",
+      "for": ["premature-contact", "prime-directive"],
+      "against": ["unfalsifiable"]
+    },
+    "already-known": {
+      "label": "Contact has been made and withheld",
+      "claim": "They have made themselves known — to someone — and it hasn't reached us.",
+      "summary": "Shifts the burden from xenobiology to human institutions, which is a genuinely different kind of claim, and one with a much richer evidentiary record to argue over.",
+      "for": ["uap-evidence"],
+      "against": ["no-artifacts", "unfalsifiable"]
+    },
+    "cant-parse": {
+      "label": "They have, and we can't tell",
+      "claim": "They are making themselves known and we lack the apparatus to notice.",
+      "summary": "The signal isn't hidden; the receiver is inadequate. Dissolves the paradox at the price of putting the answer permanently out of reach.",
+      "for": ["cant-perceive"],
+      "against": ["unfalsifiable"]
+    }
+  }
+}

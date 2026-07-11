@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Alien Key</title>
+<meta name="description" content="A branching map of what could be true about alien life — and why you might believe it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void:        #05060d;
+    --deep:        #0a0d1a;
+    --panel:       rgba(20, 26, 44, 0.55);
+    --panel-solid: #141a2c;
+    --line:        rgba(122, 162, 247, 0.14);
+    --line-hot:    rgba(122, 162, 247, 0.45);
+    --text:        #e8ecf6;
+    --muted:       #9aa4bd;
+    --dim:         #626c86;
+    --cyan:        #5ee9d5;
+    --violet:      #a78bfa;
+    --blue:        #7aa2f7;
+    --for:         #4ade9b;
+    --against:     #f87f7f;
+    --glow:        0 0 24px rgba(122, 162, 247, 0.25);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--void);
+    color: var(--text);
+    font-family: "Space Grotesk", ui-sans-serif, -apple-system, system-ui, sans-serif;
+    font-size: 16px; line-height: 1.65;
+    min-height: 100vh; overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── background layers ─────────────────────────────── */
+  #stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+  #nebula {
+    position: fixed; inset: -20%; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 50% 45% at 20% 15%, rgba(88, 60, 180, 0.20), transparent 60%),
+      radial-gradient(ellipse 45% 40% at 82% 30%, rgba(20, 130, 160, 0.16), transparent 62%),
+      radial-gradient(ellipse 60% 50% at 55% 95%, rgba(140, 50, 130, 0.13), transparent 65%);
+    filter: blur(30px);
+    animation: drift 40s ease-in-out infinite alternate;
+  }
+  @keyframes drift {
+    0%   { transform: translate(0,0) scale(1); }
+    100% { transform: translate(-3%, 2%) scale(1.08); }
+  }
+  /* scanline/vignette */
+  body::after {
+    content: ""; position: fixed; inset: 0; z-index: 1; pointer-events: none;
+    background: radial-gradient(ellipse 90% 70% at 50% 40%, transparent 40%, rgba(5,6,13,.75) 100%);
+  }
+
+  .wrap { position: relative; z-index: 2; max-width: 940px; margin: 0 auto; padding: 28px 24px 120px; }
+
+  /* ─── header ────────────────────────────────────────── */
+  header.site {
+    display: flex; align-items: center; gap: 14px;
+    padding-bottom: 18px; margin-bottom: 22px;
+    border-bottom: 1px solid var(--line);
+  }
+  .mark {
+    width: 30px; height: 30px; flex: none;
+    border: 1.5px solid var(--cyan); border-radius: 50%;
+    position: relative;
+    box-shadow: 0 0 14px rgba(94,233,213,.35), inset 0 0 10px rgba(94,233,213,.15);
+  }
+  .mark::before {
+    content: ""; position: absolute; inset: 5px;
+    border-radius: 50%; background: var(--cyan);
+    opacity: .85; animation: pulse 2.6s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { transform: scale(.55); opacity:.9 } 50% { transform: scale(1); opacity:.35 } }
+  .titles { flex: 1; min-width: 0; }
+  header.site h1 {
+    font-size: 17px; font-weight: 700; letter-spacing: 2.4px; text-transform: uppercase;
+    background: linear-gradient(92deg, var(--cyan), var(--blue) 45%, var(--violet));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  header.site p { font-size: 12px; color: var(--dim); letter-spacing: .3px; }
+
+  .hud {
+    display: flex; align-items: center; gap: 8px; flex: none;
+    font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px;
+  }
+  .hud button {
+    font: inherit; cursor: pointer; color: var(--muted);
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 7px; padding: 6px 11px;
+    backdrop-filter: blur(10px); transition: .15s;
+    letter-spacing: .5px;
+  }
+  .hud button:hover { color: var(--text); border-color: var(--line-hot); box-shadow: var(--glow); }
+  .hud .count { color: var(--dim); padding: 6px 2px; white-space: nowrap; }
+  .hud .count b { color: var(--cyan); font-weight: 500; }
+
+  /* ─── breadcrumb ────────────────────────────────────── */
+  nav.trail {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 4px;
+    margin-bottom: 30px;
+    font-family: "JetBrains Mono", monospace; font-size: 11.5px;
+  }
+  nav.trail a {
+    color: var(--dim); text-decoration: none; padding: 4px 9px;
+    border: 1px solid transparent; border-radius: 6px; transition: .15s;
+  }
+  nav.trail a:hover { color: var(--cyan); border-color: var(--line); background: var(--panel); }
+  nav.trail .sep { color: #333c52; font-size: 10px; }
+  nav.trail .current {
+    color: var(--cyan); padding: 4px 9px;
+    border: 1px solid rgba(94,233,213,.28); border-radius: 6px;
+    background: rgba(94,233,213,.06);
+  }
+
+  /* ─── the claim ─────────────────────────────────────── */
+  .claim { margin-bottom: 6px; }
+  .depth {
+    font-family: "JetBrains Mono", monospace; font-size: 10.5px;
+    color: var(--dim); letter-spacing: 1.6px; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .claim h2 {
+    font-size: clamp(26px, 4.4vw, 38px); line-height: 1.18;
+    letter-spacing: -.8px; font-weight: 700; margin-bottom: 14px;
+    text-wrap: balance;
+  }
+  .claim .summary { color: var(--muted); font-size: 17px; max-width: 66ch; }
+
+  /* ─── evidence ──────────────────────────────────────── */
+  .evidence { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 38px 0 0; }
+  @media (max-width: 760px) { .evidence { grid-template-columns: 1fr; } }
+  .col h3 {
+    display: flex; align-items: center; gap: 7px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10.5px; text-transform: uppercase; letter-spacing: 1.5px;
+    font-weight: 500; margin-bottom: 12px;
+  }
+  .col h3::before { content: ""; width: 6px; height: 6px; border-radius: 50%; }
+  .col.for h3 { color: var(--for); }
+  .col.for h3::before { background: var(--for); box-shadow: 0 0 10px var(--for); }
+  .col.against h3 { color: var(--against); }
+  .col.against h3::before { background: var(--against); box-shadow: 0 0 10px var(--against); }
+
+  details.arg {
+    background: var(--panel); backdrop-filter: blur(12px);
+    border: 1px solid var(--line); border-left: 2px solid var(--line);
+    border-radius: 10px; margin-bottom: 9px; overflow: hidden;
+    transition: border-color .18s, transform .18s, box-shadow .18s;
+  }
+  .col.for details.arg  { border-left-color: rgba(74,222,155,.5); }
+  .col.against details.arg { border-left-color: rgba(248,127,127,.5); }
+  details.arg:hover { transform: translateY(-1px); }
+  .col.for details.arg:hover  { border-color: rgba(74,222,155,.42); box-shadow: 0 0 20px rgba(74,222,155,.10); }
+  .col.against details.arg:hover { border-color: rgba(248,127,127,.42); box-shadow: 0 0 20px rgba(248,127,127,.10); }
+  details.arg summary {
+    cursor: pointer; list-style: none; padding: 12px 14px;
+    font-size: 14.5px; font-weight: 500;
+    display: flex; justify-content: space-between; align-items: center; gap: 10px;
+  }
+  details.arg summary::-webkit-details-marker { display: none; }
+  details.arg summary::after {
+    content: "+"; flex: none; color: var(--dim);
+    font-family: "JetBrains Mono", monospace; font-size: 15px;
+    transition: transform .25s;
+  }
+  details.arg[open] summary::after { content: "−"; transform: rotate(180deg); }
+  details.arg .body {
+    padding: 0 14px 14px; color: var(--muted); font-size: 14.5px; line-height: 1.68;
+    animation: unfold .28s ease;
+  }
+  @keyframes unfold { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+  .col .empty {
+    color: var(--dim); font-size: 13.5px; font-style: italic;
+    padding: 12px 14px; border: 1px dashed var(--line); border-radius: 10px;
+  }
+
+  /* ─── branches ──────────────────────────────────────── */
+  .branches { margin-top: 42px; }
+  .branches > h3 {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10.5px; text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--dim); font-weight: 500; margin-bottom: 14px;
+  }
+  a.branch {
+    position: relative; display: flex; align-items: flex-start; gap: 14px;
+    text-decoration: none; color: inherit;
+    background: var(--panel); backdrop-filter: blur(12px);
+    border: 1px solid var(--line); border-radius: 12px;
+    padding: 16px 18px; margin-bottom: 11px;
+    overflow: hidden;
+    transition: border-color .2s, transform .2s, box-shadow .2s;
+  }
+  a.branch::before {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(100deg, transparent 30%, rgba(122,162,247,.07) 50%, transparent 70%);
+    transform: translateX(-100%); transition: transform .6s ease;
+  }
+  a.branch:hover::before { transform: translateX(100%); }
+  a.branch:hover {
+    border-color: var(--line-hot);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 30px rgba(122,162,247,.13);
+  }
+  a.branch .key {
+    flex: none; width: 22px; height: 22px; margin-top: 2px;
+    display: grid; place-items: center;
+    font-family: "JetBrains Mono", monospace; font-size: 11px;
+    color: var(--dim); border: 1px solid var(--line); border-radius: 5px;
+    transition: .2s;
+  }
+  a.branch:hover .key { color: var(--void); background: var(--cyan); border-color: var(--cyan); }
+  a.branch .txt { min-width: 0; }
+  a.branch .label { font-size: 17px; font-weight: 600; margin-bottom: 3px; transition: color .2s; }
+  a.branch:hover .label { color: var(--cyan); }
+  a.branch .peek { color: var(--dim); font-size: 13.5px; line-height: 1.55; }
+  a.branch.seen .label::after {
+    content: "visited"; margin-left: 9px; vertical-align: middle;
+    font-family: "JetBrains Mono", monospace; font-size: 9px;
+    letter-spacing: .8px; text-transform: uppercase;
+    color: var(--dim); border: 1px solid var(--line);
+    border-radius: 4px; padding: 1px 5px; font-weight: 400;
+  }
+
+  .terminal {
+    margin-top: 42px; padding: 20px 22px; border-radius: 12px;
+    border: 1px dashed var(--line); background: var(--panel);
+    color: var(--dim); font-size: 14px; backdrop-filter: blur(10px);
+  }
+  .terminal b { color: var(--muted); font-weight: 500; }
+
+  .seealso { margin-top: 32px; font-size: 13.5px; color: var(--dim); }
+  .seealso .lbl {
+    font-family: "JetBrains Mono", monospace; font-size: 10.5px;
+    text-transform: uppercase; letter-spacing: 1.5px; margin-right: 6px;
+  }
+  .seealso a {
+    color: var(--muted); text-decoration: none;
+    border-bottom: 1px dotted var(--dim); transition: .15s;
+  }
+  .seealso a:hover { color: var(--violet); border-bottom-color: var(--violet); }
+
+  /* ─── view transition ───────────────────────────────── */
+  #view > * { animation: rise .42s cubic-bezier(.2,.7,.2,1) backwards; }
+  #view > *:nth-child(1) { animation-delay: .02s; }
+  #view > *:nth-child(2) { animation-delay: .09s; }
+  #view > *:nth-child(3) { animation-delay: .16s; }
+  #view > *:nth-child(4) { animation-delay: .23s; }
+  @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+  /* ─── map overlay ───────────────────────────────────── */
+  #map {
+    position: fixed; inset: 0; z-index: 50;
+    background: rgba(5,6,13,.82); backdrop-filter: blur(14px);
+    display: none; overflow-y: auto;
+    animation: fade .25s ease;
+  }
+  #map.open { display: block; }
+  @keyframes fade { from { opacity: 0 } to { opacity: 1 } }
+  .map-inner { max-width: 820px; margin: 0 auto; padding: 60px 24px 80px; }
+  .map-inner h2 {
+    font-size: 13px; font-family: "JetBrains Mono", monospace;
+    text-transform: uppercase; letter-spacing: 2px; color: var(--cyan);
+    margin-bottom: 6px;
+  }
+  .map-inner .hint { color: var(--dim); font-size: 13px; margin-bottom: 28px; }
+  .map-close {
+    position: fixed; top: 22px; right: 26px;
+    font-family: "JetBrains Mono", monospace; font-size: 11px;
+    background: var(--panel); border: 1px solid var(--line); color: var(--muted);
+    border-radius: 7px; padding: 7px 12px; cursor: pointer; transition: .15s;
+  }
+  .map-close:hover { color: var(--text); border-color: var(--line-hot); }
+  .tree, .tree ul { list-style: none; }
+  .tree ul { margin-left: 14px; padding-left: 16px; border-left: 1px solid var(--line); }
+  .tree li { margin: 3px 0; }
+  .tree a {
+    display: inline-block; text-decoration: none; color: var(--muted);
+    font-size: 14px; padding: 5px 11px; border-radius: 7px;
+    border: 1px solid transparent; transition: .15s;
+  }
+  .tree a:hover { color: var(--text); background: var(--panel); border-color: var(--line); }
+  .tree a.seen { color: var(--text); }
+  .tree a.seen::before {
+    content: "◆"; color: var(--cyan); font-size: 8px;
+    margin-right: 7px; vertical-align: middle;
+  }
+  .tree a:not(.seen)::before {
+    content: "◇"; color: var(--dim); font-size: 8px;
+    margin-right: 7px; vertical-align: middle;
+  }
+  .tree a.here {
+    color: var(--void); background: var(--cyan); font-weight: 600;
+    box-shadow: 0 0 20px rgba(94,233,213,.4);
+  }
+  .tree a.here::before { content: "◆"; color: var(--void); }
+
+  .kbd-hint {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 20;
+    display: flex; justify-content: center; gap: 18px;
+    padding: 12px; pointer-events: none;
+    font-family: "JetBrains Mono", monospace; font-size: 10.5px; color: var(--dim);
+    background: linear-gradient(transparent, rgba(5,6,13,.9) 55%);
+  }
+  .kbd-hint kbd {
+    background: var(--panel-solid); border: 1px solid var(--line);
+    border-radius: 4px; padding: 2px 6px; color: var(--muted); font: inherit;
+  }
+  @media (max-width: 700px) { .kbd-hint { display: none; } }
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+<div id="nebula"></div>
+
+<div class="wrap">
+  <header class="site">
+    <div class="mark"></div>
+    <div class="titles">
+      <h1 id="site-title">The Alien Key</h1>
+      <p id="site-sub"></p>
+    </div>
+    <div class="hud">
+      <span class="count"><b id="seen-n">0</b>/<span id="total-n">0</span> explored</span>
+      <button id="map-btn">◈ MAP</button>
+      <button id="reset-btn" title="Clear explored history">RESET</button>
+    </div>
+  </header>
+
+  <nav class="trail" id="trail"></nav>
+  <main id="view"></main>
+</div>
+
+<div id="map">
+  <button class="map-close" id="map-close">ESC ✕</button>
+  <div class="map-inner">
+    <h2>Full Tree</h2>
+    <p class="hint">Every branch, at once. Filled diamonds are places you've been.</p>
+    <ul class="tree" id="tree"></ul>
+  </div>
+</div>
+
+<div class="kbd-hint">
+  <span><kbd>1</kbd>–<kbd>9</kbd> branch</span>
+  <span><kbd>←</kbd> back</span>
+  <span><kbd>M</kbd> map</span>
+  <span><kbd>Esc</kbd> close</span>
+</div>
+
+<script>
+/* ═══ starfield ══════════════════════════════════════════ */
+(() => {
+  const cv = document.getElementById("stars");
+  const ctx = cv.getContext("2d");
+  const layers = [
+    { n: 90, speed: 0.018, size: [0.4, 0.9], alpha: [0.25, 0.55], par: 0.008 },
+    { n: 45, speed: 0.045, size: [0.7, 1.5], alpha: [0.40, 0.85], par: 0.020 },
+    { n: 16, speed: 0.085, size: [1.2, 2.2], alpha: [0.60, 1.00], par: 0.038 },
+  ];
+  const TINTS = ["255,255,255", "180,210,255", "200,180,255", "160,240,230"];
+  let stars = [], w = 0, h = 0, mx = 0, my = 0, tx = 0, ty = 0;
+  const rnd = (a, b) => a + Math.random() * (b - a);
+
+  function seed() {
+    w = cv.width = innerWidth * devicePixelRatio;
+    h = cv.height = innerHeight * devicePixelRatio;
+    cv.style.width = innerWidth + "px";
+    cv.style.height = innerHeight + "px";
+    stars = [];
+    layers.forEach((L, li) => {
+      for (let i = 0; i < L.n; i++) stars.push({
+        x: Math.random() * w, y: Math.random() * h,
+        r: rnd(...L.size) * devicePixelRatio,
+        a: rnd(...L.alpha),
+        tw: rnd(0.004, 0.016), ph: Math.random() * Math.PI * 2,
+        tint: TINTS[(Math.random() * TINTS.length) | 0],
+        L: li,
+      });
+    });
+  }
+
+  let shooter = null, nextShot = 240;
+  function frame() {
+    ctx.clearRect(0, 0, w, h);
+    tx += (mx - tx) * 0.045;
+    ty += (my - ty) * 0.045;
+
+    for (const s of stars) {
+      const L = layers[s.L];
+      s.y += L.speed * devicePixelRatio;
+      if (s.y > h + 4) { s.y = -4; s.x = Math.random() * w; }
+      s.ph += s.tw;
+      const twinkle = 0.62 + 0.38 * Math.sin(s.ph);
+      const px = s.x + tx * L.par * w;
+      const py = s.y + ty * L.par * h;
+      ctx.beginPath();
+      ctx.arc(px, py, s.r, 0, 6.2832);
+      ctx.fillStyle = `rgba(${s.tint},${s.a * twinkle})`;
+      ctx.fill();
+      if (s.r > 1.6 * devicePixelRatio) {   // glow on the big ones only
+        ctx.beginPath();
+        ctx.arc(px, py, s.r * 3.4, 0, 6.2832);
+        ctx.fillStyle = `rgba(${s.tint},${s.a * twinkle * 0.07})`;
+        ctx.fill();
+      }
+    }
+
+    // the occasional shooting star, because why not
+    if (!shooter && --nextShot <= 0) {
+      shooter = { x: rnd(w * .1, w * .9), y: rnd(0, h * .35), vx: rnd(-3.2, -6) * devicePixelRatio, vy: rnd(2.4, 4.4) * devicePixelRatio, life: 1 };
+      nextShot = rnd(420, 1100);
+    }
+    if (shooter) {
+      const s = shooter;
+      ctx.beginPath();
+      ctx.moveTo(s.x, s.y);
+      ctx.lineTo(s.x - s.vx * 9, s.y - s.vy * 9);
+      const g = ctx.createLinearGradient(s.x, s.y, s.x - s.vx * 9, s.y - s.vy * 9);
+      g.addColorStop(0, `rgba(200,240,255,${s.life * .85})`);
+      g.addColorStop(1, "rgba(200,240,255,0)");
+      ctx.strokeStyle = g;
+      ctx.lineWidth = 1.6 * devicePixelRatio;
+      ctx.stroke();
+      s.x += s.vx; s.y += s.vy; s.life -= 0.012;
+      if (s.life <= 0) shooter = null;
+    }
+    requestAnimationFrame(frame);
+  }
+
+  addEventListener("resize", seed);
+  addEventListener("mousemove", e => {
+    mx = (e.clientX / innerWidth - .5) * 2;
+    my = (e.clientY / innerHeight - .5) * 2;
+  });
+  seed();
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) frame();
+  else { /* draw one static frame */ ctx.clearRect(0,0,w,h); for (const s of stars) { ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,6.2832); ctx.fillStyle=`rgba(${s.tint},${s.a})`; ctx.fill(); } }
+})();
+
+/* ═══ app ════════════════════════════════════════════════ */
+let DATA = null;
+const PARENT = {};
+const SEEN_KEY = "alien-key:seen";
+let seen = new Set(JSON.parse(localStorage.getItem(SEEN_KEY) || "[]"));
+
+function indexParents() {
+  for (const [id, n] of Object.entries(DATA.nodes))
+    for (const kid of n.children || []) PARENT[kid] = id;
+}
+
+function pathTo(id) {
+  const path = [], guard = new Set();
+  let cur = id;
+  while (cur && !guard.has(cur)) { guard.add(cur); path.unshift(cur); cur = PARENT[cur]; }
+  return path;
+}
+
+function markSeen(id) {
+  if (seen.has(id)) return;
+  seen.add(id);
+  localStorage.setItem(SEEN_KEY, JSON.stringify([...seen]));
+}
+
+function updateHud() {
+  document.getElementById("seen-n").textContent = seen.size;
+  document.getElementById("total-n").textContent = Object.keys(DATA.nodes).length;
+}
+
+function argCard(id, side) {
+  const a = DATA.arguments[id];
+  if (!a) return `<div class="empty">missing argument: ${id}</div>`;
+  return `<details class="arg"><summary>${a.title}</summary><div class="body">${a.body}</div></details>`;
+}
+
+function column(ids, side) {
+  const cards = (ids || []).map(i => argCard(i, side)).join("");
+  const head = side === "for" ? "Reasons to believe it" : "Reasons to doubt it";
+  return `<div class="col ${side}"><h3>${head}</h3>${cards || `<div class="empty">Nothing catalogued yet.</div>`}</div>`;
+}
+
+let currentKids = [];
+
+function render() {
+  const id = location.hash.slice(1) || "root";
+  const node = DATA.nodes[id];
+  if (!node) { location.hash = "root"; return; }
+
+  markSeen(id);
+  updateHud();
+
+  const path = pathTo(id);
+  document.getElementById("trail").innerHTML = path.map((pid, i) => {
+    const last = i === path.length - 1;
+    const chunk = last
+      ? `<span class="current">${DATA.nodes[pid].label}</span>`
+      : `<a href="#${pid}">${DATA.nodes[pid].label}</a>`;
+    return (i ? `<span class="sep">▸</span>` : "") + chunk;
+  }).join("");
+
+  currentKids = node.children || [];
+  const kids = currentKids.map((kid, i) => {
+    const k = DATA.nodes[kid];
+    if (!k) return "";
+    return `<a class="branch ${seen.has(kid) ? "seen" : ""}" href="#${kid}">
+      <span class="key">${i + 1}</span>
+      <span class="txt">
+        <span class="label">${k.label}</span>
+        <span class="peek">${k.claim}</span>
+      </span>
+    </a>`;
+  }).join("");
+
+  const branches = kids
+    ? `<section class="branches"><h3>Where it goes from here</h3>${kids}</section>`
+    : `<div class="terminal">You've hit a leaf — the tree stops here. Add children to <b>${id}</b> in <b>data.json</b> to keep drilling.</div>`;
+
+  const sa = (node.seeAlso || []).filter(s => DATA.nodes[s]);
+  const seeAlso = sa.length
+    ? `<div class="seealso"><span class="lbl">See also</span>` +
+      sa.map(s => `<a href="#${s}">${DATA.nodes[s].claim}</a>`).join(" &nbsp;·&nbsp; ") + `</div>`
+    : "";
+
+  document.getElementById("view").innerHTML = `
+    <div class="claim">
+      <div class="depth">Depth ${path.length - 1} — ${currentKids.length || "no"} branch${currentKids.length === 1 ? "" : "es"} ahead</div>
+      <h2>${node.claim}</h2>
+      <p class="summary">${node.summary || ""}</p>
+    </div>
+    <section class="evidence">${column(node.for, "for")}${column(node.against, "against")}</section>
+    ${branches}
+    ${seeAlso}
+  `;
+  buildTree();
+  window.scrollTo({ top: 0 });
+}
+
+/* ─── map ─── */
+function buildTree() {
+  const here = location.hash.slice(1) || "root";
+  const walk = id => {
+    const n = DATA.nodes[id];
+    const cls = [seen.has(id) ? "seen" : "", id === here ? "here" : ""].filter(Boolean).join(" ");
+    const kids = (n.children || []).length
+      ? `<ul>${n.children.map(walk).join("")}</ul>` : "";
+    return `<li><a class="${cls}" href="#${id}">${n.label}</a>${kids}</li>`;
+  };
+  document.getElementById("tree").innerHTML = walk("root");
+}
+const mapEl = document.getElementById("map");
+const toggleMap = on => mapEl.classList.toggle("open", on ?? !mapEl.classList.contains("open"));
+document.getElementById("map-btn").onclick = () => toggleMap(true);
+document.getElementById("map-close").onclick = () => toggleMap(false);
+mapEl.addEventListener("click", e => { if (e.target.tagName === "A") toggleMap(false); });
+
+document.getElementById("reset-btn").onclick = () => {
+  seen = new Set(); localStorage.removeItem(SEEN_KEY);
+  updateHud(); render();
+};
+
+/* ─── keyboard ─── */
+addEventListener("keydown", e => {
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  if (e.key === "Escape") return toggleMap(false);
+  if (e.key.toLowerCase() === "m") return toggleMap();
+  if (e.key === "ArrowLeft" || e.key === "Backspace") {
+    const p = PARENT[location.hash.slice(1) || "root"];
+    if (p) { e.preventDefault(); location.hash = p; }
+    return;
+  }
+  const n = parseInt(e.key, 10);
+  if (n >= 1 && n <= 9 && currentKids[n - 1]) location.hash = currentKids[n - 1];
+});
+
+/* ─── boot ─── */
+fetch("data.json")
+  .then(r => r.json())
+  .then(d => {
+    DATA = d;
+    indexParents();
+    document.title = d.meta.title;
+    document.getElementById("site-title").textContent = d.meta.title;
+    document.getElementById("site-sub").textContent = d.meta.subtitle;
+    render();
+  })
+  .catch(() => {
+    document.getElementById("view").innerHTML =
+      `<p style="color:#f87f7f">Couldn't load <code>data.json</code>. If you opened this as a file://, serve it over HTTP instead.</p>`;
+  });
+
+addEventListener("hashchange", render);
+</script>
+</body>
+</html>

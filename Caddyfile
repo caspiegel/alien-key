@@ -1,0 +1,13 @@
+# Railway injects $PORT at runtime; 80 is the local-docker fallback.
+:{$PORT:80} {
+	root * /srv
+	file_server
+	encode gzip
+
+	# data.json is the whole content model — never let a stale copy get cached.
+	@data path /data.json
+	header @data Cache-Control "no-cache"
+
+	# Unknown paths fall back to the app; hash routing handles the rest.
+	try_files {path} /index.html
+}
